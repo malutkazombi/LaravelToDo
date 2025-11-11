@@ -10,10 +10,10 @@
 *   用途：javascriptライブラリー「flatpickr」のスタイルシートを指定
 -->
 @section('styles')
-    <!-- 「flatpickr」の デフォルトスタイルシートをインポート -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <!-- 「flatpickr」の ブルーテーマの追加スタイルシートをインポート -->
-    <link rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
+<!-- 「flatpickr」の デフォルトスタイルシートをインポート -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<!-- 「flatpickr」の ブルーテーマの追加スタイルシートをインポート -->
+<link rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
 @endsection
 
 <!--
@@ -41,7 +41,7 @@
                                     {{ $folder->title }}
                                 </a>
                             </td>
-                            <td><a href="#">編集</a></td>
+                            <td><a href="{{ route('folders.edit', ['id' => $folder->id]) }}">編集</a></td>
                             <td><a href="#">削除</a></td>
                         </tr>
                         @endforeach
@@ -71,15 +71,15 @@
                     </thead>
                     <tbody>
                         @foreach($tasks as $task)
-                            <tr>
-                                <td>{{ $task->title }}</td>
-                                <td>
-                                    <span class="label {{ $task->status_class }}">{{ $task->status_label }}</span>
-                                </td>
-                                <td>{{ $task->formatted_due_date }}</td>
-                                <td><a href="#">編集</a></td>
-                                <td><a href="#">削除</a></td>
-                            </tr>
+                        <tr>
+                            <td>{{ $task->title }}</td>
+                            <td>
+                                <span class="label {{ $task->status_class }}">{{ $task->status_label }}</span>
+                            </td>
+                            <td>{{ $task->formatted_due_date }}</td>
+                            <td><a href="#">編集</a></td>
+                            <td><a href="#">削除</a></td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
