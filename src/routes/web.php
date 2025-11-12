@@ -28,3 +28,5 @@ Route::get('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, "showEd
 Route::post('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, "edit"]);
 Route::get('/folders/{id}/delete', [FolderController::class,"showDeleteForm"])->name('folders.delete');
 Route::post('/folders/{id}/delete', [FolderController::class,"delete"]);
+Route::get('/folders/{id}/tasks/{task_id}/delete', [TaskController::class,"showDeleteForm"])->name('tasks.delete');
+Route::post('/folders/{id}/tasks/{task_id}/delete', [TaskController::class,"delete"]);
