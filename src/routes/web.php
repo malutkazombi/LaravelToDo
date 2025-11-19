@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\FolderController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +28,11 @@ Route::get('/folders/{id}/edit', [FolderController::class, "showEditForm"])->nam
 Route::post('/folders/{id}/edit', [FolderController::class, "edit"]);
 Route::get('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, "showEditForm"])->name('tasks.edit');
 Route::post('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, "edit"]);
-Route::get('/folders/{id}/delete', [FolderController::class,"showDeleteForm"])->name('folders.delete');
-Route::post('/folders/{id}/delete', [FolderController::class,"delete"]);
-Route::get('/folders/{id}/tasks/{task_id}/delete', [TaskController::class,"showDeleteForm"])->name('tasks.delete');
-Route::post('/folders/{id}/tasks/{task_id}/delete', [TaskController::class,"delete"]);
+Route::get('/folders/{id}/delete', [FolderController::class, "showDeleteForm"])->name('folders.delete');
+Route::post('/folders/{id}/delete', [FolderController::class, "delete"]);
+Route::get('/folders/{id}/tasks/{task_id}/delete', [TaskController::class, "showDeleteForm"])->name('tasks.delete');
+Route::post('/folders/{id}/tasks/{task_id}/delete', [TaskController::class, "delete"]);
+Route::get('/home', [HomeController::class, "index"])->name('home');
+Route::get('/', [HomeController::class, "index"])->name('home');
+/* certification page （会員登録・ログイン・ログアウト・パスワード再設定など） */
+Auth::routes();
