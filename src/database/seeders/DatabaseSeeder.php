@@ -9,6 +9,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         /* call seeder list */
+        $this->call(UsersTableSeeder::class);
         $this->call(FolderTableSeeder::class);
         $this->call(TasksTableSeeder::class);
         // 他のシーダーも必要に応じて追加
