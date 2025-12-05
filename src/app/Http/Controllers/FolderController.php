@@ -34,49 +34,49 @@ class FolderController extends Controller
         $user->folders()->save($folder);
 
         return redirect()->route('tasks.index', [
-            'id' => $folder->id,
+            'folder' => $folder->id,
         ]);
     }
 
-    public function showEditForm(int $id)
+    public function showEditForm(Folder $folder)
     {
         /** @var App\Models\User **/
         $user = Auth::user();
-        $folder = $user->folders()->findOrFail($id);
+        $folder = $user->folders()->findOrFail($folder->id);
 
         return view('folders/edit', [
             'folder_id' => $folder->id,
             'folder_title' => $folder->title,
         ]);
     }
-    public function edit(int $id, EditFolder $request)
+    public function edit(Folder $folder, EditFolder $request)
     {
         /** @var App\Models\User **/
         $user = Auth::user();
-        $folder = $user->folders()->findOrFail($id);
+        $folder = $user->folders()->findOrFail($folder->id);
         $folder->title = $request->title;
         $folder->save();
 
         return redirect()->route('tasks.index', [
-            'id' => $folder->id,
+            'folder' => $folder->id,
         ]);
     }
-    public function showDeleteForm(int $id)
+    public function showDeleteForm(Folder $folder)
     {
         /** @var App\Models\User **/
         $user = Auth::user();
-        $folder = $user->folders()->findOrFail($id);
+        $folder = $user->folders()->findOrFail($folder->id);
 
         return view('folders/delete', [
             'folder_id' => $folder->id,
             'folder_title' => $folder->title,
         ]);
     }
-    public function delete(int $id)
+    public function delete(Folder $folder)
     {
         /** @var App\Models\User **/
         $user = Auth::user();
-        $folder = $user->folders()->findOrFail($id);
+        $folder = $user->folders()->findOrFail($folder->id);
 
         $folder->tasks()->delete();
         $folder->delete();
@@ -84,7 +84,7 @@ class FolderController extends Controller
         $folder = Folder::first();
 
         return redirect()->route('tasks.index', [
-            'id' => $folder->id
+            'folder' => $folder->id
         ]);
     }
 }
