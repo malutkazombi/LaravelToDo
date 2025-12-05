@@ -24,32 +24,34 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [HomeController::class, "index"])->name('home');
     Route::get('/', [HomeController::class, "index"])->name('home');
 
-    /* index page */
-    Route::get("/folders/{folder}/tasks", [TaskController::class, "index"])->name("tasks.index");
+    Route::group(['middleware' => 'can:view,folder'], function () {
+        /* index page */
+        Route::get("/folders/{folder}/tasks", [TaskController::class, "index"])->name("tasks.index");
 
-    /* folders new create page */
-    Route::get('/folders/create', [FolderController::class, "showCreateForm"])->name('folders.create');
-    Route::post('/folders/create', [FolderController::class, "create"]);
+        /* folders new create page */
+        Route::get('/folders/create', [FolderController::class, "showCreateForm"])->name('folders.create');
+        Route::post('/folders/create', [FolderController::class, "create"]);
 
-    /* folders new edit page */
-    Route::get('/folders/{folder}/edit', [FolderController::class, "showEditForm"])->name('folders.edit');
-    Route::post('/folders/{folder}/edit', [FolderController::class, "edit"]);
+        /* folders new edit page */
+        Route::get('/folders/{folder}/edit', [FolderController::class, "showEditForm"])->name('folders.edit');
+        Route::post('/folders/{folder}/edit', [FolderController::class, "edit"]);
 
-    /* folders new delete page */
-    Route::get('/folders/{folder}/delete', [FolderController::class, "showDeleteForm"])->name('folders.delete');
-    Route::post('/folders/{folder}/delete', [FolderController::class, "delete"]);
+        /* folders new delete page */
+        Route::get('/folders/{folder}/delete', [FolderController::class, "showDeleteForm"])->name('folders.delete');
+        Route::post('/folders/{folder}/delete', [FolderController::class, "delete"]);
 
-    /* tasks new create page */
-    Route::get('/folders/{folder}/tasks/create', [TaskController::class, "showCreateForm"])->name('tasks.create');
-    Route::post('/folders/{folder}/tasks/create', [TaskController::class, "create"]);
+        /* tasks new create page */
+        Route::get('/folders/{folder}/tasks/create', [TaskController::class, "showCreateForm"])->name('tasks.create');
+        Route::post('/folders/{folder}/tasks/create', [TaskController::class, "create"]);
 
-    /* tasks new edit page */
-    Route::get('/folders/{folder}/tasks/{task}/edit', [TaskController::class, "showEditForm"])->name('tasks.edit');
-    Route::post('/folders/{folder}/tasks/{task}/edit', [TaskController::class, "edit"]);
+        /* tasks new edit page */
+        Route::get('/folders/{folder}/tasks/{task}/edit', [TaskController::class, "showEditForm"])->name('tasks.edit');
+        Route::post('/folders/{folder}/tasks/{task}/edit', [TaskController::class, "edit"]);
 
-    /* tasks new delete page */
-    Route::get('/folders/{folder}/tasks/{task}/delete', [TaskController::class, "showDeleteForm"])->name('tasks.delete');
-    Route::post('/folders/{folder}/tasks/{task}/delete', [TaskController::class, "delete"]);
+        /* tasks new delete page */
+        Route::get('/folders/{folder}/tasks/{task}/delete', [TaskController::class, "showDeleteForm"])->name('tasks.delete');
+        Route::post('/folders/{folder}/tasks/{task}/delete', [TaskController::class, "delete"]);
+    });
 });
 
 /* certification page （会員登録・ログイン・ログアウト・パスワード再設定など） */
